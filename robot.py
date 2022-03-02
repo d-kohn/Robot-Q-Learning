@@ -60,7 +60,7 @@ class Robot:
         return game_map.get_sensor_data(s.direction[sensor])
 
     def choose_action(s, epsilon):
-        s.q_table[0,0,0,0,0] = [0,0,0,0,0]
+#        s.q_table[0,0,0,0,0] = [0,0,0,0,0]
         cur_state = s.q_table[s.current_state]
         # Do random action
         if (1 - epsilon < random()):
@@ -69,10 +69,12 @@ class Robot:
         else:
             best_actions = [0]
             for action in range(1, s.ACTION_COUNT):
-                if (int(cur_state[action]*1000) > int(cur_state[best_actions[0]]*1000)):
+#                if (int(cur_state[action]*10) > int(cur_state[best_actions[0]]*10)):
+                if (cur_state[action]) > cur_state[best_actions[0]]:
                     best_actions = [action]
-                elif (int(cur_state[action]*1000) == int(cur_state[best_actions[0]]*1000)):
-                    best_actions.append(action)   
+#                elif (int(cur_state[action]*10) == int(cur_state[best_actions[0]]*10)):
+                elif (cur_state[action]) == cur_state[best_actions[0]]:
+                        best_actions.append(action)   
         
             if (len(best_actions) == 1):
                 return best_actions[0]
